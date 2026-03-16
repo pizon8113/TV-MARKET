@@ -1,44 +1,87 @@
 import React from 'react';
 
 const Home = () => {
-  // 샘플 상품 데이터
-  const products = [
-    { id: 1, name: "프리미엄 4K 스마트 TV", price: "1,200,000원", category: "가전", icon: "📺" },
-    { id: 2, name: "고성능 게이밍 헤드셋", price: "150,000원", category: "IT", icon: "🎧" },
-    { id: 3, name: "빈티지 가죽 소파", price: "850,000원", category: "가구", icon: "🛋️" },
-    { id: 4, name: "유기농 원두 1kg", price: "35,000원", category: "식품", icon: "☕" },
+  // 샘플 데이터 (이미지 포함)
+  const categories = ["내 주변 떨이", "산지직송", "중고명품", "기업신상"];
+  const liveItems = [
+    { id: 1, title: "오늘만 이 가격! 꿀사과 (특)", price: "15,000원", viewers: "2,189", img: "https://images.unsplash.com/photo-1560806887-1e4cd0b6bcd6?w=400" },
+    { id: 2, title: "인증 중고차: 렉서스 ES", price: "35,000,000원", viewers: "1,500", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400" }
+  ];
+  const gridItems = [
+    { id: 3, title: "토적 배이커 복아점", price: "10,000원", viewers: "1,384", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200" },
+    { id: 4, title: "인증 중고차: 레너커", price: "30,000원", viewers: "2,323", img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=200" },
+    { id: 5, title: "제철 완두콩 1kg", price: "12,000원", viewers: "2,223", img: "https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?w=200" },
+    { id: 6, title: "무지 긴 유기농 당근", price: "7,000원", viewers: "2,287", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=200" }
   ];
 
   return (
-    <div className="p-4 bg-gray-50 min-h-screen">
-      {/* 상단 배너 영역 */}
-      <div className="bg-blue-600 text-white p-6 rounded-xl mb-6 shadow-md">
-        <h1 className="text-2xl font-bold italic">TV-MARKET LIVE</h1>
-        <p className="mt-2 opacity-90">지금 가장 핫한 라이브 쇼핑 아이템!</p>
+    <div className="max-w-md mx-auto bg-white min-h-screen pb-24 font-sans text-gray-900">
+      {/* 1. Header */}
+      <div className="flex items-center justify-between px-4 py-3 sticky top-0 bg-white z-50">
+        <div className="flex items-center space-x-2">
+          <span className="text-orange-600 font-black text-xl italic">TV MARKET</span>
+          <span className="bg-gray-100 text-[10px] px-2 py-0.5 rounded-full font-bold">🔥 2,189</span>
+          <span className="bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">● ON-AIR</span>
+        </div>
+        <div className="flex space-x-3 text-xl">
+          <span>🔍</span>
+          <span>🛒</span>
+        </div>
       </div>
 
-      <h2 className="text-lg font-bold mb-4 flex items-center">
-        <span className="mr-2">🔥</span> 오늘의 추천 상품
-      </h2>
+      {/* 2. Top Live Section */}
+      <div className="px-4 mt-2">
+        <h2 className="font-bold text-lg mb-3">지금 가장 HOT한 방송 🔥</h2>
+        <div className="flex space-x-3 overflow-x-auto no-scrollbar">
+          {liveItems.map(item => (
+            <div key={item.id} className="relative min-w-[240px] h-64 rounded-2xl overflow-hidden shadow-lg">
+              <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
+              <div className="absolute top-3 left-3 bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded flex items-center">
+                LIVE <span className="ml-1 opacity-80">| 📶</span>
+              </div>
+              <div className="absolute top-3 right-3 bg-black/40 text-white text-[10px] px-2 py-0.5 rounded-full backdrop-blur-sm">
+                🔥 {item.viewers}
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white">
+                <p className="text-sm font-bold truncate">{item.title}</p>
+                <p className="text-xs opacity-90">{item.price}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      {/* 상품 리스트 (그리드 레이아웃) */}
-      <div className="grid grid-cols-1 gap-4">
-        {products.map(product => (
-          <div key={product.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center hover:shadow-md transition-shadow">
-            <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center text-3xl mr-4">
-              {product.icon}
+      {/* 3. Category Tabs */}
+      <div className="flex justify-between px-4 py-6 border-b border-gray-100">
+        {categories.map((cat, idx) => (
+          <button key={idx} className={`text-sm font-bold ${idx === 1 ? 'text-orange-600 border-b-2 border-orange-600' : 'text-gray-400'}`}>
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* 4. Product Grid */}
+      <div className="grid grid-cols-2 gap-3 p-4">
+        {gridItems.map(item => (
+          <div key={item.id} className="relative rounded-xl overflow-hidden shadow-sm bg-gray-50">
+            <img src={item.img} alt={item.title} className="w-full h-40 object-cover" />
+            <div className="absolute top-2 left-2 bg-orange-600 text-white text-[8px] px-1.5 py-0.5 rounded">LIVE</div>
+            <div className="p-2">
+              <p className="text-[10px] text-gray-500 flex items-center">🔥 {item.viewers}</p>
+              <h3 className="text-xs font-bold truncate mt-1">{item.title}</h3>
+              <p className="text-xs font-black mt-0.5">{item.price}</p>
             </div>
-            <div className="flex-1">
-              <span className="text-xs text-blue-500 font-semibold">{product.category}</span>
-              <h3 className="font-bold text-gray-800">{product.name}</h3>
-              <p className="text-red-500 font-bold">{product.price}</p>
-            </div>
-            <button className="bg-gray-800 text-white px-3 py-1 rounded text-sm">담기</button>
           </div>
         ))}
+      </div>
+
+      {/* 5. Live Ticker (Floating) */}
+      <div className="fixed bottom-20 left-4 right-4 bg-black/70 backdrop-blur-md text-white py-2 px-4 rounded-full text-[10px] flex items-center shadow-2xl">
+        <span className="mr-2">📶</span> ...진짜 당도 보장합니다! 무료 배송 맞고요!...
       </div>
     </div>
   );
 };
 
 export default Home;
+
