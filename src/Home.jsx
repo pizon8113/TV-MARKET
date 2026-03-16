@@ -1,14 +1,30 @@
 import React from 'react';
 
 const Home = () => {
+  const products = [
+    { id: 1, name: "프리미엄 4K TV", price: "1,200,000원", img: "📺" },
+    { id: 2, name: "무선 노이즈캔슬링 헤드셋", price: "350,000원", img: "🎧" },
+    { id: 3, name: "스마트 홈 카메라", price: "89,000원", img: "📷" },
+  ];
+
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">TV-MARKET 홈</h1>
-      <p>환영합니다! 상표 등록이 완료된 공식 마켓 플레이스입니다.</p>
-      {/* 홈 화면의 나머지 내용을 여기에 작성하세요 */}
+      <h1 className="text-2xl font-bold mb-2">TV-MARKET</h1>
+      <p className="text-gray-600 mb-6">오늘의 라이브 특가 상품을 만나보세요!</p>
+      
+      <div className="grid grid-cols-1 gap-4">
+        {products.map(product => (
+          <div key={product.id} className="border rounded-lg p-4 flex items-center shadow-sm">
+            <div className="text-4xl mr-4">{product.img}</div>
+            <div>
+              <h3 className="font-bold">{product.name}</h3>
+              <p className="text-blue-600 font-semibold">{product.price}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-// 반드시 이 아랫줄이 있어야 배포 에러가 나지 않습니다.
 export default Home;
