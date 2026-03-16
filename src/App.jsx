@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Home from './Home';
-import Search from './Search';      // S 대문자 확인
-import Wishlist from './Wishlist';  // W 대문자 확인
-import MyChannel from './MyChannel'; // M, C 대문자 확인
-import Navigation from './navigation'; // n 소문자 확인
+import Search from './Search';      // 대문자 S
+import Wishlist from './Wishlist';  // 대문자 W
+import MyChannel from './MyChannel'; // 대문자 M
+import Navigation from './Navigation'; // 대문자 N (1단계에서 바꾼 이름)
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
